@@ -87,3 +87,32 @@ type P = keyof Product;
 ```
 
 Here the type of `P` will be `"name" | "email" | "age" | "isSubscribed"`. The generated types can be literal type of string or number.
+
+<h4 style="font-size: 24px; margin-top: 30px;">3. Explain the difference between `any`, `unknown`, and `never` types in TypeScript.</h4>
+
+In TypeScript, `any` type means the value of a variable can be anything. Which means we can do anything with that variable, which we might not want. Because by setting the type `any`, we are practically ditching all the benefits TypeScript offers. In most of the cases, where we use type `any`, we may want to use `unknown` there.
+
+Type `unknown` means the value of a variable is unknown. So we will have to be sure what it is before doing anything to it and type `unknown` enforces us to do it where type `any` lets us just "do" the operation. We can see and example below:
+
+![type any](./src/assets/type-any.png)
+
+In the above example, we see that `unknownVariable` has type `any` and `'hero'` as value. But we can do anything with the `unknownVariable`, like `unknownVariable++` which can't be allowed to done with a type `string`.
+
+![type unknown](./src/assets/type-unknown.png)
+
+But when we set the type of `unknownVariable` as `unknown`, TypeScript don't let's us just do anything and yells at us. If we want to do something, first we will have to make sure or narrow down what the type is and then do any operation like below.
+
+![type unknown two](./src/assets/type-unknown-2.png)
+
+So, we can make a rule of thumb.
+
+1. type `any` lets you do anything you want.
+2. type `unknown` restricts you to do anything at all.
+
+<p style="margin-top: 35px;">Now we can discuss about `never`. The type `never` is the last option of any case, which literally means "the value that will never occur".</p>
+
+The type `never` is can be used as the last option of "type narrowing" where we the value of a variable is not expected and it should never be the value. It is mostly useful in exhaustive type checking or for function that doesn't return anything.
+
+![type never](./src/assets/type-never.png)
+
+In the above example, we can see that we expect the value of variable `value` as type `string` and `number`. So it should not be anything but them (in this case `undefined`). So TypeScript yells at me that the value of `value` can't be undefined and we will have to change it to work.
